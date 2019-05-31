@@ -26,6 +26,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation libs.appcompat
+    implementation libs.arrow_core_data
     implementation libs.constraint
     implementation libs.coroutines
     implementation libs.funktionale_either
@@ -38,4 +39,6 @@ dependencies {
     implementation libs.retrofit_coroutines_adapter
     implementation libs.retrofit_gson
     implementation libs.recyclerview
+
+    testImplementation libs.junit
 }
