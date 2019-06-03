@@ -1,6 +1,6 @@
 package com.jaimegc.agilemobilechallenge.data.api.config
 
-import com.jaimegc.agilemobilechallenge.data.api.error.Server4xxApiException
+import com.jaimegc.agilemobilechallenge.data.api.error.Server404ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.Server500ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.ServerConnectionApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.ServerUnknownApiException
@@ -10,9 +10,8 @@ import retrofit2.Response
 open class ServerApiClient(private val serverApiConfig: ServerApiConfig) {
 
     companion object {
-        const val RESPONSE_MAX_INTERVAL: Int = 99
         const val RESPONSE_ERROR_500: Int = 500
-        const val RESPONSE_ERROR_400: Int = 400
+        const val RESPONSE_ERROR_404: Int = 404
     }
 
     fun <T> getApi(apiRest: Class<T>): T {
@@ -66,7 +65,7 @@ open class ServerApiClient(private val serverApiConfig: ServerApiConfig) {
 
         when (this.code()) {
             RESPONSE_ERROR_500 -> throw Server500ApiException
-            in RESPONSE_ERROR_400..RESPONSE_ERROR_400 + RESPONSE_MAX_INTERVAL -> throw Server4xxApiException
+            RESPONSE_ERROR_404 -> throw Server404ApiException
             else -> throw ServerUnknownApiException
         }
     }

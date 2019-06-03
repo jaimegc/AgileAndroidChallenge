@@ -8,4 +8,4 @@ object ServerUnknownApiException : ServerApiException()
 
 object Server500ApiException : ServerApiException()
 
-object Server4xxApiException : ServerApiException()
+object Server404ApiException : ServerApiException()

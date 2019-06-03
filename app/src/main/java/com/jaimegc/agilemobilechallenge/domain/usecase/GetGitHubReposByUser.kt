@@ -11,7 +11,4 @@ class GetGitHubReposByUser(
 
     suspend operator fun invoke(name: String): Either<DomainError, List<GitHubRepo>> =
         repository.getGitHubReposByUser(name)
-
-    fun invalidateCache() =
-        repository.invalidateCache()
 }

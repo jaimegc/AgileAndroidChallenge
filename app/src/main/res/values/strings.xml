@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AgileMobileChallenge</string>
+    <string name="github_viewer">GitHub Viewer</string>
+    <string name="hint_username">Enter username</string>
+    <string name="search">Search</string>
+
+    <!-- Dialogs -->
+    <string name="ok">OK</string>
+    <string name="info">Info</string>
+    <string name="user_not_found">User not found. Please enter another name.</string>
+    <string name="generic_error">A network error has occurred. Check your Internet connection and try again later.</string>
 </resources>

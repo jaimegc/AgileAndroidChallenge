@@ -9,12 +9,9 @@ class GitHubRepoRepository(
     private val dataSources: List<GitHubRepoDataSource>
 ) {
     suspend fun getGitHubReposByUser(name: String): Either<DomainError, List<GitHubRepo>> =
-        dataSources.first { it.isUpdated() }.getGitHubReposByUser(name).map {
+        dataSources.first { it.isUpdated() && it.contains(name) }.getGitHubReposByUser(name).map {
             it.also { _ ->
                 dataSources.forEach { ds -> ds.populate(name, it) }
             }
         }
-
-    fun invalidateCache() =
-        dataSources.forEach { it.invalidateCache() }
 }

@@ -1,7 +1,7 @@
 package com.jaimegc.agilemobilechallenge.common.extensions
 
 import arrow.core.Either
-import com.jaimegc.agilemobilechallenge.data.api.error.Server4xxApiException
+import com.jaimegc.agilemobilechallenge.data.api.error.Server404ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.Server500ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.ServerConnectionApiException
 import com.jaimegc.agilemobilechallenge.domain.model.DomainError
@@ -11,7 +11,7 @@ fun Exception.apiException(): DomainError =
     when {
         this is ServerConnectionApiException -> DomainError.NotInternetDomainError
         this is Server500ApiException -> DomainError.GenericDomainError
-        this is Server4xxApiException -> DomainError.GenericDomainError
+        this is Server404ApiException -> DomainError.UserNotFoundDomainError
         this.cause is ConnectException -> DomainError.NotInternetDomainError
         else -> DomainError.GenericDomainError
     }
