@@ -4,7 +4,6 @@ import androidx.lifecycle.LifecycleObserver
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import org.kodein.di.KodeinAware
 
 abstract class BaseActivity : AppCompatActivity(), KodeinAware {

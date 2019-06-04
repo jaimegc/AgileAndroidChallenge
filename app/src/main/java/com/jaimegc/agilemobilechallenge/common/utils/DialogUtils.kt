@@ -8,15 +8,27 @@ import com.jaimegc.agilemobilechallenge.common.extensions.resToText
 class DialogUtils {
 
     companion object {
-        fun showDialogUserNotFound(ctx: Context?) {
+        fun showUserNotFound(ctx: Context?) {
             ctx?.run {
                 showAlertDialog(ctx, ctx.resToText(R.string.user_not_found))
+            }
+        }
+
+        fun showUserUnknown(ctx: Context?) {
+            ctx?.run {
+                showAlertDialog(ctx, ctx.resToText(R.string.user_unknown))
             }
         }
 
         fun showError(ctx: Context?) {
             ctx?.run {
                 showAlertDialog(ctx, ctx.resToText(R.string.generic_error))
+            }
+        }
+
+        fun showReposNotFound(ctx: Context?) {
+            ctx?.run {
+                showAlertDialog(ctx, ctx.resToText(R.string.repos_not_found_error))
             }
         }
 

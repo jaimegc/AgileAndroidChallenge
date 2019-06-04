@@ -9,3 +9,5 @@ object ServerUnknownApiException : ServerApiException()
 object Server500ApiException : ServerApiException()
 
 object Server404ApiException : ServerApiException()
+
+object Server403ApiException : ServerApiException()

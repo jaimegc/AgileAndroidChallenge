@@ -27,6 +27,11 @@ android {
         targetCompatibility = "8"
         sourceCompatibility = "8"
     }
+
+    androidExtensions {
+        experimental = true
+        features = ["parcelize"]
+    }
 }
 
 dependencies {
@@ -34,6 +39,7 @@ dependencies {
 
     implementation libs.appcompat
     implementation libs.arrow_core_data
+    implementation libs.circle_imageview
     implementation libs.constraint
     implementation libs.coroutines
     implementation libs.funktionale_either
@@ -42,6 +48,7 @@ dependencies {
     implementation libs.kodein_framework_x
     implementation libs.okhttp
     implementation libs.okhttp_logging
+    implementation libs.picasso
     implementation libs.retrofit
     implementation libs.retrofit_coroutines_adapter
     implementation libs.retrofit_gson

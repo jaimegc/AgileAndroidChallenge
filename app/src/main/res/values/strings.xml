@@ -8,5 +8,7 @@
     <string name="ok">OK</string>
     <string name="info">Info</string>
     <string name="user_not_found">User not found. Please enter another name.</string>
+    <string name="user_unknown">This user has a problem. Please enter another name.</string>
     <string name="generic_error">A network error has occurred. Check your Internet connection and try again later.</string>
+    <string name="repos_not_found_error">This user has no repositories. Please enter another name.</string>
 </resources>

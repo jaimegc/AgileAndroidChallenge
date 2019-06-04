@@ -1,6 +1,7 @@
 package com.jaimegc.agilemobilechallenge.common.extensions
 
 import arrow.core.Either
+import com.jaimegc.agilemobilechallenge.data.api.error.Server403ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.Server404ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.Server500ApiException
 import com.jaimegc.agilemobilechallenge.data.api.error.ServerConnectionApiException
@@ -12,6 +13,7 @@ fun Exception.apiException(): DomainError =
         this is ServerConnectionApiException -> DomainError.NotInternetDomainError
         this is Server500ApiException -> DomainError.GenericDomainError
         this is Server404ApiException -> DomainError.UserNotFoundDomainError
+        this is Server403ApiException -> DomainError.UserUnknownDomainError
         this.cause is ConnectException -> DomainError.NotInternetDomainError
         else -> DomainError.GenericDomainError
     }

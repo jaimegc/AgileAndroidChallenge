@@ -28,12 +28,13 @@ class MainPresenter(
         val result = getGitHubReposByUser.invoke(name)
         view?.hideLoading()
 
-        result.fold({ handleError(it) }, { view?.goDetail(it) })
+        result.fold({ handleError(it) }, { if (it.isNotEmpty()) view?.goDetail(it) else view?.showReposNotFound() })
     }
 
     private fun handleError(error: DomainError) {
         when(error) {
-            DomainError.UserNotFoundDomainError -> view?.showUserNotFoundError()
+            DomainError.UserNotFoundDomainError -> view?.showUserNotFound()
+            DomainError.UserUnknownDomainError -> view?.showUserUnknown()
             else -> view?.showError()
         }
     }
@@ -42,7 +43,9 @@ class MainPresenter(
         fun goDetail(items: List<GitHubRepo>)
         fun showLoading()
         fun hideLoading()
-        fun showUserNotFoundError()
+        fun showReposNotFound()
+        fun showUserNotFound()
+        fun showUserUnknown()
         fun showError()
     }
 }

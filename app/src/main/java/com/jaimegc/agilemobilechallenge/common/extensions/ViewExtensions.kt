@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import androidx.annotation.IdRes
 
 fun View.hide() {
     visibility = View.GONE
@@ -40,6 +41,8 @@ fun EditText.searchKeyboardClicked(searchKeyboardClicked: (String) -> Unit) =
             false
         }
     }
+
+inline fun <reified T : View> View.find(@IdRes id: Int): T = findViewById(id)
 
 fun Context.resToText(resource: Int): String =
     this.getString(resource)

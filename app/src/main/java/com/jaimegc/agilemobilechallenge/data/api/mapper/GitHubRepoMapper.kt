@@ -13,11 +13,12 @@ class GitHubReposDtoToGitHubReposMapper {
         GitHubRepo(
             owner = mapper(gitHubRepoDto.owner),
             name = gitHubRepoDto.name,
-            language = gitHubRepoDto.language
+            language = gitHubRepoDto.language ?: "???"
         )
 
     private fun mapper(ownerDto: OwnerRepoDto): OwnerRepo =
         OwnerRepo(
-            avatarUrl = ownerDto.avatarUrl
+            avatarUrl = ownerDto.avatarUrl,
+            username = ownerDto.login
         )
 }

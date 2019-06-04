@@ -8,6 +8,6 @@ import retrofit2.http.Path
 
 interface GitHubRepoRest {
 
-    @GET("/users/{name}/repos")
-    fun getGitHubReposByUser(@Path("name") username: String): Deferred<Response<List<GitHubRepoDto>>>
+    @GET("/users/{repository}/repos")
+    fun getGitHubReposByUser(@Path("repository") username: String): Deferred<Response<List<GitHubRepoDto>>>
 }
