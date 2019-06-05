@@ -23,11 +23,11 @@ import org.mockito.MockitoAnnotations
 class MainPresenterTest {
 
     companion object {
-        val USERNAME = "username"
-        val user = OwnerRepo("https://www.image1.com", USERNAME)
-        val repo1 = GitHubRepo(user, "Best project", "Kotlin")
-        val repo2 = GitHubRepo(user, "The incredible", "Java")
-        val repo3 = GitHubRepo(user, "Nice", "Javascript")
+        const val USERNAME = "username"
+        private val user = OwnerRepo("https://www.image.com", USERNAME)
+        private val repo1 = GitHubRepo(user, "Best project", "Kotlin")
+        private val repo2 = GitHubRepo(user, "The incredible", "Java")
+        private val repo3 = GitHubRepo(user, "Nice", "Javascript")
         val LIST_REPOS = listOf(repo1, repo2, repo3)
     }
 
@@ -54,8 +54,8 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `should return all repos from use case if the list contains values`() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.right(LIST_REPOS))
+    fun `should return all data from use case if the list contains values`() = runBlockingTest {
+        givenUseCaseWithData()
 
         presenter.getGitHubReposByUser(USERNAME)
 
@@ -66,8 +66,8 @@ class MainPresenterTest {
     }
 
     @Test
-    fun `should return repos not found from use case if the list does not contain values`() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.right(emptyList()))
+    fun `should return data not found from use case if the list does not contain values`() = runBlockingTest {
+        givenUseCaseWithEmptyData()
 
         presenter.getGitHubReposByUser(USERNAME)
 
@@ -79,7 +79,7 @@ class MainPresenterTest {
 
     @Test
     fun `should return user not found from use case if the user does not exist`() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.left(DomainError.UserNotFoundDomainError))
+        givenUseCaseWithUserNotFoundError()
 
         presenter.getGitHubReposByUser(USERNAME)
 
@@ -91,7 +91,7 @@ class MainPresenterTest {
 
     @Test
     fun `should return user unknown from use case if the user exists but there is some problem`() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.left(DomainError.UserUnknownDomainError))
+        givenUseCaseWithUserUnknownError()
 
         presenter.getGitHubReposByUser(USERNAME)
 
@@ -99,5 +99,21 @@ class MainPresenterTest {
         verify(getGitHubReposByUser).invoke(USERNAME)
         verify(view).hideLoading()
         verify(view).showUserUnknown()
+    }
+
+    private fun givenUseCaseWithData() = runBlockingTest {
+        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.right(LIST_REPOS))
+    }
+
+    private fun givenUseCaseWithEmptyData() = runBlockingTest {
+        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.right(emptyList()))
+    }
+
+    private fun givenUseCaseWithUserNotFoundError() = runBlockingTest {
+        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.left(DomainError.UserNotFoundDomainError))
+    }
+
+    private fun givenUseCaseWithUserUnknownError() = runBlockingTest {
+        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.left(DomainError.UserUnknownDomainError))
     }
 }

@@ -43,7 +43,6 @@ dependencies {
     implementation libs.constraint
     implementation libs.coroutines
     implementation libs.design
-    implementation libs.funktionale_either
     implementation libs.kodein_generic
     implementation libs.kodein_framework_core
     implementation libs.kodein_framework_x
