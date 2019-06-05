@@ -3,6 +3,7 @@ package com.jaimegc.agilemobilechallenge.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +40,7 @@ class DetailActivity : BaseActivity(), DetailPresenter.View {
     private lateinit var profileImage: CircleImageView
     private lateinit var recycler: RecyclerView
     private lateinit var progress: ProgressBar
+    private lateinit var back: ImageView
     private lateinit var adapter: ViewItemsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +57,11 @@ class DetailActivity : BaseActivity(), DetailPresenter.View {
         profileImage = findViewById(R.id.profile_image)
         recycler = findViewById(R.id.recycler)
         progress = findViewById(R.id.progress)
+        back = findViewById(R.id.back)
+
+        back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun initializeData() {

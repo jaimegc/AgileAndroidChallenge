@@ -54,7 +54,6 @@
         app:layout_constraintStart_toStartOf="@+id/view"
         app:civ_border_width="2dp"
         app:civ_border_color="@android:color/white"
-        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintDimensionRatio="1:1"/>
@@ -94,5 +93,16 @@
         app:layout_constraintEnd_toEndOf="@+id/recycler"
         app:layout_constraintStart_toStartOf="@+id/recycler"
         android:layout_marginStart="8dp"/>
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:srcCompat="@drawable/ic_back"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
