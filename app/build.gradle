@@ -42,6 +42,7 @@ dependencies {
     implementation libs.circle_imageview
     implementation libs.constraint
     implementation libs.coroutines
+    implementation libs.design
     implementation libs.funktionale_either
     implementation libs.kodein_generic
     implementation libs.kodein_framework_core
@@ -54,5 +55,9 @@ dependencies {
     implementation libs.retrofit_gson
     implementation libs.recyclerview
 
+    testImplementation libs.coroutines_test
     testImplementation libs.junit
+    testImplementation libs.mockito_core
+    testImplementation libs.mockito_inline
+    testImplementation libs.mockito_kotlin
 }
