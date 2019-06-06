@@ -2,8 +2,6 @@ package com.jaimegc.agilemobilechallenge
 
 import arrow.core.Either
 import com.jaimegc.agilemobilechallenge.data.datasource.GitHubRepoDataSource
-import com.jaimegc.agilemobilechallenge.data.datasource.MemoryGitHubRepoDataSource
-import com.jaimegc.agilemobilechallenge.data.datasource.NetworkGitHubRepoDataSource
 import com.jaimegc.agilemobilechallenge.data.repository.GitHubRepoRepository
 import com.jaimegc.agilemobilechallenge.domain.model.GitHubRepo
 import com.jaimegc.agilemobilechallenge.domain.model.OwnerRepo
@@ -27,8 +25,8 @@ class GitHubRepoRepositoryTest {
         val LIST_REPOS = listOf(repo1, repo2, repo3)
     }
 
-    private val dataSourceMemory: MemoryGitHubRepoDataSource = mock()
-    private val dataSourceNetwork: NetworkGitHubRepoDataSource = mock()
+    private val dataSourceMemory: GitHubRepoDataSource = mock()
+    private val dataSourceNetwork: GitHubRepoDataSource = mock()
     private lateinit var gitHubRepoRepository: GitHubRepoRepository
 
     @Before
