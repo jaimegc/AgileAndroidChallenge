@@ -35,7 +35,8 @@ class DetailActivity : BaseActivity(), DetailPresenter.View {
     }
 
     override val presenter: DetailPresenter by instance()
-    override val layoutId: Int = R.layout.activity_detail
+    override val layoutId: Int =
+        if (System.currentTimeMillis() % 2 == 0L) R.layout.activity_detail_way1 else R.layout.activity_detail_way2
     private lateinit var username: TextView
     private lateinit var profileImage: CircleImageView
     private lateinit var recycler: RecyclerView
