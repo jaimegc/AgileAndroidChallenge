@@ -9,7 +9,7 @@
         <OnSwipe
             app:dragDirection="dragUp"
             app:touchAnchorId="@id/recycler"
-            app:touchAnchorSide="top" />
+            app:touchAnchorSide="top"/>
 
     </Transition>
 
@@ -18,7 +18,7 @@
             android:id="@id/background"
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
         </Constraint>
@@ -28,11 +28,11 @@
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="@+id/background"
-            app:layout_constraintEnd_toEndOf="@+id/background"
-            app:layout_constraintStart_toStartOf="@+id/background"
+            app:layout_constraintTop_toTopOf="@id/background"
+            app:layout_constraintEnd_toEndOf="@id/background"
+            app:layout_constraintStart_toStartOf="@id/background"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/username">
+            app:layout_constraintBottom_toTopOf="@id/username">
         </Constraint>
 
         <Constraint
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             app:layout_constraintBottom_toBottomOf="@id/background"
-            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintStart_toEndOf="@id/back"
             app:layout_constraintTop_toTopOf="@id/background">
         </Constraint>
 
