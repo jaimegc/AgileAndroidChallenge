@@ -51,13 +51,13 @@ The idea is complete this challenge on a couple of afternoons more or less. In t
        
 ## Screens
 
-## Main & Detail
+### Main & Detail
 
 <p align="left">
   <img src="./art/image2.jpg">
 </p>
 
-## Animations
+### Animations
 
 <p align="left">
   <img src="./art/sample.gif">
