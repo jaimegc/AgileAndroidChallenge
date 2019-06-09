@@ -45,7 +45,6 @@ ext {
             mockito_core                  : [group: 'org.mockito', name: 'mockito-core', version: versions.mockito],
             mockito_inline                : [group: 'org.mockito', name: 'mockito-inline', version: versions.mockito],
             mockito_kotlin                : [group: 'com.nhaarman.mockitokotlin2', name: 'mockito-kotlin', version: versions.mockito_kotlin],
-            kodein_framework_x            : [group: 'org.kodein.di', name: 'kodein-di-framework-android-x', version: versions.kodein],
             okhttp                        : [group: 'com.squareup.okhttp3', name: 'okhttp', version: versions.okhttp],
             okhttp_logging                : [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: versions.okhttp],
             picasso                       : [group: 'com.squareup.picasso', name: 'picasso', version: versions.picasso],
