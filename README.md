@@ -62,3 +62,49 @@ The idea is complete this challenge on a couple of afternoons more or less. In t
 <p align="left">
   <img src="./art/sample.gif">
 </p>
+
+## Developed By
+
+Jaime GC
+
+<a href="https://es.linkedin.com/in/jaimeguerrerocubero">
+  <img alt="Add me to Linkedin" src="./art/linkedin.png" height="128"/>
+</a>
+
+## Libraries used in this project
+
+* [Arrow Either][1]
+* [Coroutines][2]
+* [Kodein][3]
+* [Retrofit][4]
+* [Picasso][5]
+* [Mockito][6]
+* [Mockito Kotlin][7]
+* [OkHttp][8]
+* [Circle ImageView][9]
+
+License
+-------
+
+    Copyright 2019 Jaime GC
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.    
+    
+[1]: https://arrow-kt.io/docs/arrow/core/either/
+[2]: https://github.com/Kotlin/kotlinx.coroutines
+[3]: https://github.com/Kodein-Framework/Kodein-DI
+[4]: https://github.com/square/retrofit
+[5]: https://github.com/square/picasso
+[6]: https://github.com/mockito/mockito
+[7]: https://github.com/nhaarman/mockito-kotlin
+[8]: https://square.github.io/okhttp/
+[9]: https://github.com/hdodenhof/CircleImageView
