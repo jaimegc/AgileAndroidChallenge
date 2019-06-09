@@ -32,6 +32,33 @@ In addition to the implementation of all functionalities and requirements, the f
 
 ## Android Reference
 
-<p align="center">
+<p align="left">
   <img src="./art/image1.jpg">
+</p>
+
+# My Solution 👨🏽‍💻
+
+The idea is complete this challenge on a couple of afternoons more or less. In this project you will see:
+
+    Clean Architecture with MVP
+    Kodein for DI
+    Coroutines for network requests
+    Either instead of exceptions
+    Animations using MotionLayout and MotionScene
+    Kotlin extensions for views, activities, images, etc.
+    BetterAdapter to draw list items
+    Unit testing for presenter and repository
+       
+## Screens
+
+## Main & Detail
+
+<p align="left">
+  <img src="./art/image2.jpg">
+</p>
+
+## Animations
+
+<p align="left">
+  <img src="./art/sample.gif">
 </p>
