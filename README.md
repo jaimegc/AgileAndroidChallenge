@@ -81,7 +81,7 @@ Jaime GC
 * [Mockito][6]
 * [Mockito Kotlin][7]
 * [OkHttp][8]
-* [Circle ImageView][9]
+* [CircleImageView][9]
 
 ## Attributions
 
