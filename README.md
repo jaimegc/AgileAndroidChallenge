@@ -83,6 +83,11 @@ Jaime GC
 * [OkHttp][8]
 * [Circle ImageView][9]
 
+## Attributions
+
+* [Karumi][10] for their amazing GitHub [repos][11]
+* [47 Degrees][12] because I ❤️ [Either][1] and [Arrow][13]
+
 License
 -------
 
@@ -108,3 +113,7 @@ License
 [7]: https://github.com/nhaarman/mockito-kotlin
 [8]: https://square.github.io/okhttp/
 [9]: https://github.com/hdodenhof/CircleImageView
+[10]: https://www.karumi.com/
+[11]: https://github.com/Karumi
+[12]: https://www.47deg.com/
+[13]: https://github.com/arrow-kt/arrow
