@@ -48,7 +48,9 @@ The idea is complete this challenge on a couple of afternoons more or less. In t
     Kotlin extensions for views, activities, images, etc.
     BetterAdapter to draw list items
     Unit testing for presenter and repository
-       
+
+There is a branch called <b>mvp-new-way</b> that uses another way to implement the repository and datasources.
+
 ## Screens
 
 ### Main & Detail
