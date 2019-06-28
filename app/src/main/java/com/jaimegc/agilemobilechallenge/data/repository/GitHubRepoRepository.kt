@@ -1,17 +1,18 @@
 package com.jaimegc.agilemobilechallenge.data.repository
 
 import arrow.core.Either
-import com.jaimegc.agilemobilechallenge.data.datasource.GitHubRepoDataSource
+import com.jaimegc.agilemobilechallenge.data.datasource.*
 import com.jaimegc.agilemobilechallenge.domain.model.DomainError
 import com.jaimegc.agilemobilechallenge.domain.model.GitHubRepo
 
 class GitHubRepoRepository(
-    private val dataSources: List<GitHubRepoDataSource>
+    private val local: LocalGitHubRepoDataSource,
+    private val remote: RemoteGitHubRepoDataSource
 ) {
     suspend fun getGitHubReposByUser(name: String): Either<DomainError, List<GitHubRepo>> =
-        dataSources.first { it.isUpdated() && it.contains(name) }.getGitHubReposByUser(name).map {
-            it.also { _ ->
-                dataSources.forEach { ds -> ds.populate(name, it) }
-            }
+        if (local.isValid(name)) {
+            local.getGitHubReposByUser(name)
+        } else {
+            remote.getGitHubReposByUser(name).also { it.map { list -> local.save(name, list) } }
         }
 }

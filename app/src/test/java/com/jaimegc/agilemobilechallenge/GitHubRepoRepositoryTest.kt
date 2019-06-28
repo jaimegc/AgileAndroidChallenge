@@ -1,7 +1,8 @@
 package com.jaimegc.agilemobilechallenge
 
 import arrow.core.Either
-import com.jaimegc.agilemobilechallenge.data.datasource.GitHubRepoDataSource
+import com.jaimegc.agilemobilechallenge.data.datasource.LocalGitHubRepoDataSource
+import com.jaimegc.agilemobilechallenge.data.datasource.RemoteGitHubRepoDataSource
 import com.jaimegc.agilemobilechallenge.data.repository.GitHubRepoRepository
 import com.jaimegc.agilemobilechallenge.domain.model.GitHubRepo
 import com.jaimegc.agilemobilechallenge.domain.model.OwnerRepo
@@ -25,8 +26,8 @@ class GitHubRepoRepositoryTest {
         val LIST_REPOS = listOf(repo1, repo2, repo3)
     }
 
-    private val dataSourceMemory: GitHubRepoDataSource = mock()
-    private val dataSourceNetwork: GitHubRepoDataSource = mock()
+    private val dataSourceLocal: LocalGitHubRepoDataSource = mock()
+    private val dataSourceRemote: RemoteGitHubRepoDataSource = mock()
     private lateinit var gitHubRepoRepository: GitHubRepoRepository
 
     @Before
@@ -34,64 +35,50 @@ class GitHubRepoRepositoryTest {
         MockitoAnnotations.initMocks(this)
 
         gitHubRepoRepository =
-            GitHubRepoRepository(listOf(dataSourceMemory, dataSourceNetwork))
+            GitHubRepoRepository(dataSourceLocal, dataSourceRemote)
     }
 
     @Test
     fun `should return get all data from the first datasource if info is updated and contains the key`() = runBlockingTest {
-        givenDataSourceWithData(dataSourceMemory)
+        givenDataSourceLocalWithData(dataSourceLocal)
 
         gitHubRepoRepository.getGitHubReposByUser(USERNAME)
 
-        verify(dataSourceMemory, times(1)).getGitHubReposByUser(USERNAME)
-        verify(dataSourceNetwork, never()).getGitHubReposByUser(USERNAME)
+        verify(dataSourceLocal, times(1)).getGitHubReposByUser(USERNAME)
+        verify(dataSourceRemote, never()).getGitHubReposByUser(USERNAME)
     }
 
     @Test
     fun `should return get all data from the second datasource if info is not updated`() = runBlockingTest {
-        givenDataSourceWithOldData(dataSourceMemory)
-        givenDataSourceWithData(dataSourceNetwork)
+        givenDataSourceLocalWithOldData(dataSourceLocal)
+        givenDataSourceRemoteWithData(dataSourceRemote)
 
         gitHubRepoRepository.getGitHubReposByUser(USERNAME)
 
-        verify(dataSourceMemory, never()).getGitHubReposByUser(USERNAME)
-        verify(dataSourceNetwork, times(1)).getGitHubReposByUser(USERNAME)
+        verify(dataSourceLocal, never()).getGitHubReposByUser(USERNAME)
+        verify(dataSourceRemote, times(1)).getGitHubReposByUser(USERNAME)
     }
 
     @Test
     fun `should call populate with new data for each datasource after obtain all data`() = runBlockingTest {
-        givenDataSourceWithOldData(dataSourceMemory)
-        givenDataSourceWithData(dataSourceNetwork)
+        givenDataSourceLocalWithOldData(dataSourceLocal)
+        givenDataSourceRemoteWithData(dataSourceRemote)
 
         gitHubRepoRepository.getGitHubReposByUser(USERNAME)
 
-        verify(dataSourceMemory, times(1)).populate(USERNAME, LIST_REPOS)
-        verify(dataSourceNetwork, times(1)).populate(USERNAME, LIST_REPOS)
+        verify(dataSourceLocal, times(1)).save(USERNAME, LIST_REPOS)
     }
 
-    @Test
-    fun `should get all data from the second datasource if first does not contain the key`() = runBlockingTest {
-        givenDataSourceWithoutTheKey(dataSourceMemory)
-        givenDataSourceWithData(dataSourceNetwork)
-
-        gitHubRepoRepository.getGitHubReposByUser(USERNAME)
-
-        verify(dataSourceMemory, never()).getGitHubReposByUser(USERNAME)
-        verify(dataSourceNetwork, times(1)).getGitHubReposByUser(USERNAME)
+    private fun givenDataSourceLocalWithData(dataSourceLocal: LocalGitHubRepoDataSource) = runBlockingTest {
+        whenever(dataSourceLocal.isValid(USERNAME)).thenReturn(true)
+        whenever(dataSourceLocal.getGitHubReposByUser(USERNAME)).thenReturn(Either.right(LIST_REPOS))
     }
 
-    private fun givenDataSourceWithData(dataSource: GitHubRepoDataSource) = runBlockingTest {
-        whenever(dataSource.isUpdated()).thenReturn(true)
-        whenever(dataSource.contains(USERNAME)).thenReturn(true)
-        whenever(dataSource.getGitHubReposByUser(USERNAME)).thenReturn(Either.right(LIST_REPOS))
+    private fun givenDataSourceRemoteWithData(dataSourceRemote: RemoteGitHubRepoDataSource) = runBlockingTest {
+        whenever(dataSourceRemote.getGitHubReposByUser(USERNAME)).thenReturn(Either.right(LIST_REPOS))
     }
 
-    private fun givenDataSourceWithOldData(dataSource: GitHubRepoDataSource) {
-        whenever(dataSource.isUpdated()).thenReturn(false)
-    }
-
-    private fun givenDataSourceWithoutTheKey(dataSource: GitHubRepoDataSource) {
-        whenever(dataSource.isUpdated()).thenReturn(true)
-        whenever(dataSource.contains(USERNAME)).thenReturn(false)
+    private fun givenDataSourceLocalWithOldData(dataSourceLocal: LocalGitHubRepoDataSource) {
+        whenever(dataSourceLocal.isValid(USERNAME)).thenReturn(false)
     }
 }

@@ -7,9 +7,7 @@ import com.jaimegc.agilemobilechallenge.common.TimeProvider
 import com.jaimegc.agilemobilechallenge.data.api.client.GitHubRepoApiClient
 import com.jaimegc.agilemobilechallenge.data.api.config.ServerApiConfig
 import com.jaimegc.agilemobilechallenge.data.api.config.ServerApiGitHubConfigBuilder
-import com.jaimegc.agilemobilechallenge.data.datasource.GitHubRepoDataSource
-import com.jaimegc.agilemobilechallenge.data.datasource.MemoryGitHubRepoDataSource
-import com.jaimegc.agilemobilechallenge.data.datasource.NetworkGitHubRepoDataSource
+import com.jaimegc.agilemobilechallenge.data.datasource.*
 import com.jaimegc.agilemobilechallenge.data.repository.GitHubRepoRepository
 import com.jaimegc.agilemobilechallenge.domain.usecase.GetGitHubReposByUser
 import org.kodein.di.Kodein
@@ -19,15 +17,16 @@ class KodeinModules(context: Context) {
 
     val repositories = Kodein.Module("repositories") {
         bind<GitHubRepoRepository>() with singleton {
-            GitHubRepoRepository(listOf(instance<GitHubRepoDataSource>(),
-                NetworkGitHubRepoDataSource(instance())
-            ))
+            GitHubRepoRepository(instance(), instance())
         }
     }
 
     val dataSources = Kodein.Module("dataSources") {
-        bind<GitHubRepoDataSource>() with singleton {
-            MemoryGitHubRepoDataSource(instance())
+        bind<LocalGitHubRepoDataSource>() with singleton {
+            LocalGitHubRepoDataSource(instance())
+        }
+        bind<RemoteGitHubRepoDataSource>() with provider {
+            RemoteGitHubRepoDataSource(instance())
         }
     }
 
