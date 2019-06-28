@@ -11,5 +11,5 @@ class GitHubRepoApiClient(
 ) : ServerApiClient(serverApiConfig) {
 
     suspend fun getGitHubReposByUser(username: String): List<GitHubRepoDto>? =
-        handleResponse(suspendApiCall(call = { getApi(GitHubRepoRest::class.java).getGitHubReposByUser(username).await() }))
+        handleResponse(suspendApiCall(call = { getApi(GitHubRepoRest::class.java).getGitHubReposByUser(username) }))
 }
