@@ -28,7 +28,7 @@ class MainPresenterTest {
         private val repo1 = GitHubRepo(user, "Best project", "Kotlin")
         private val repo2 = GitHubRepo(user, "The incredible", "Java")
         private val repo3 = GitHubRepo(user, "Nice", "Javascript")
-        val LIST_REPOS = listOf(repo1, repo2, repo3)
+        private val LIST_REPOS = listOf(repo1, repo2, repo3)
     }
 
     private val view: MainPresenter.View = mock()
