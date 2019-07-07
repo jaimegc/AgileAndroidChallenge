@@ -7,8 +7,13 @@ import com.jaimegc.agilemobilechallenge.common.extensions.mapResponse
 import com.jaimegc.agilemobilechallenge.common.extensions.results
 import com.jaimegc.agilemobilechallenge.data.api.client.GitHubRepoApiClient
 import com.jaimegc.agilemobilechallenge.data.api.mapper.GitHubReposDtoToGitHubReposMapper
+import com.jaimegc.agilemobilechallenge.data.datasource.room.GitHubRepositoryDao
+import com.jaimegc.agilemobilechallenge.data.datasource.room.GitHubRepositoryEntity
+import com.jaimegc.agilemobilechallenge.data.datasource.room.GitHubUserDao
+import com.jaimegc.agilemobilechallenge.data.datasource.room.GitHubUserEntity
 import com.jaimegc.agilemobilechallenge.domain.model.DomainError
 import com.jaimegc.agilemobilechallenge.domain.model.GitHubRepo
+import com.jaimegc.agilemobilechallenge.domain.model.OwnerRepo
 import java.util.concurrent.TimeUnit
 
 
@@ -25,6 +30,8 @@ class RemoteGitHubRepoDataSource(
 }
 
 class LocalGitHubRepoDataSource(
+    private val daoRepository: GitHubRepositoryDao,
+    private val daoUser: GitHubUserDao,
     private val timeProvider: TimeProvider
 ) {
 
@@ -32,18 +39,21 @@ class LocalGitHubRepoDataSource(
         private val CACHE_TIME = TimeUnit.MINUTES.toMillis(10)
     }
 
-    private val cache = linkedMapOf<String, List<GitHubRepo>>()
     private var lastUpdate = 0L
 
-    fun getGitHubReposByUser(name: String): Either<DomainError, List<GitHubRepo>> =
-        cache[name]?.let { Either.right(it) } ?: Either.left(DomainError.NotIndexStringFoundDomainError(name))
+    suspend fun getGitHubReposByUser(name: String): Either<DomainError, List<GitHubRepo>> =
+        daoUser.getUserByName(name)?.let { user ->
+            val repos = daoRepository.getRepositoriesByUser(name)
+            Either.right(repos.map { it.toGitHubRepo(user) })
+        } ?: Either.left(DomainError.NotIndexStringFoundDomainError(name))
 
-    fun save(name: String, repos: List<GitHubRepo>) {
+    suspend fun save(name: String, repos: List<GitHubRepo>) {
         lastUpdate = timeProvider.time()
-        cache[name] = repos
+        daoUser.insert(repos[0].toUserEntity(name))
+        daoRepository.insertAll(repos.map { it.toReposEntity() })
     }
 
-    fun isValid(name: String, forceRefresh: Boolean = false): Boolean =
+    suspend fun isValid(name: String, forceRefresh: Boolean = false): Boolean =
         if (!forceRefresh) {
             isUpdated() && contains(name)
         } else {
@@ -54,11 +64,17 @@ class LocalGitHubRepoDataSource(
     private fun isUpdated(): Boolean =
         timeProvider.time() - lastUpdate < CACHE_TIME
 
-    private fun contains(key: String): Boolean =
-        cache.contains(key)
+    private suspend fun contains(username: String): Boolean =
+        daoUser.getUserByName(username) != null
 
-    private fun invalidateCache() {
+    private suspend fun invalidateCache() {
         lastUpdate = 0
-        cache.clear()
+        daoUser.deleteAll()
+        daoRepository.deleteAll()
     }
+
+    private fun GitHubRepo.toUserEntity(username: String): GitHubUserEntity = GitHubUserEntity(username, owner.avatarUrl)
+    private fun GitHubRepo.toReposEntity(): GitHubRepositoryEntity = GitHubRepositoryEntity(name, language, owner.username)
+    private fun GitHubRepositoryEntity.toGitHubRepo(user: GitHubUserEntity): GitHubRepo =
+        GitHubRepo(OwnerRepo(user.username, user.avatarUrl), name, language)
 }

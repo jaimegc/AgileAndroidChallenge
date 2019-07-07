@@ -9,6 +9,6 @@ data class GitHubRepoDto(
 )
 
 data class OwnerRepoDto(
-    @SerializedName("avatar_url") val avatarUrl: String?,
-    @SerializedName("login") val login: String
+    @SerializedName("login") val login: String,
+    @SerializedName("avatar_url") val avatarUrl: String?
 )

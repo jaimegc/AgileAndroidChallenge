@@ -19,7 +19,7 @@ class GitHubRepoRepositoryTest {
     companion object {
         const val USERNAME = "username"
 
-        private val user = OwnerRepo("https://www.image.com", MainPresenterTest.USERNAME)
+        private val user = OwnerRepo(USERNAME, "https://www.image.com")
         private val repo1 = GitHubRepo(user, "Best project", "Kotlin")
         private val repo2 = GitHubRepo(user, "The incredible", "Java")
         private val repo3 = GitHubRepo(user, "Nice", "Javascript")
@@ -78,7 +78,7 @@ class GitHubRepoRepositoryTest {
         whenever(dataSourceRemote.getGitHubReposByUser(USERNAME)).thenReturn(Either.right(LIST_REPOS))
     }
 
-    private fun givenDataSourceLocalWithOldData(dataSourceLocal: LocalGitHubRepoDataSource) {
+    private fun givenDataSourceLocalWithOldData(dataSourceLocal: LocalGitHubRepoDataSource) = runBlockingTest {
         whenever(dataSourceLocal.isValid(USERNAME)).thenReturn(false)
     }
 }

@@ -24,7 +24,7 @@ class MainPresenterTest {
 
     companion object {
         const val USERNAME = "username"
-        private val user = OwnerRepo("https://www.image.com", USERNAME)
+        private val user = OwnerRepo(USERNAME, "https://www.image.com")
         private val repo1 = GitHubRepo(user, "Best project", "Kotlin")
         private val repo2 = GitHubRepo(user, "The incredible", "Java")
         private val repo3 = GitHubRepo(user, "Nice", "Javascript")

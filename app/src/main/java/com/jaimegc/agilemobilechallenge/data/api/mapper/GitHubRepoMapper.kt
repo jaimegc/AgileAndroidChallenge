@@ -18,7 +18,7 @@ class GitHubReposDtoToGitHubReposMapper {
 
     private fun mapper(ownerDto: OwnerRepoDto): OwnerRepo =
         OwnerRepo(
-            avatarUrl = ownerDto.avatarUrl,
-            username = ownerDto.login
+            username = ownerDto.login,
+            avatarUrl = ownerDto.avatarUrl
         )
 }

@@ -12,6 +12,6 @@ data class GitHubRepo(
 
 @Parcelize
 data class OwnerRepo(
-    val avatarUrl: String?,
-    val username: String
+    val username: String,
+    val avatarUrl: String?
 ) : Parcelable

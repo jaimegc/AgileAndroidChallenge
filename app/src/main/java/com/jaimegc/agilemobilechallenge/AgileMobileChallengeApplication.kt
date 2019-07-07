@@ -13,6 +13,8 @@ class AgileMobileChallengeApplication : Application(), KodeinAware {
 
         val modules = KodeinModules(this@AgileMobileChallengeApplication)
 
+        import(modules.database, allowOverride = true)
+        import(modules.roomDaos, allowOverride = true)
         import(modules.repositories, allowOverride = true)
         import(modules.dataSources, allowOverride = true)
         import(modules.apiClients, allowOverride = true)
