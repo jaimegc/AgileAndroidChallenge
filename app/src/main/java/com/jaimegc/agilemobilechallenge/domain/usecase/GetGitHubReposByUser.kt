@@ -9,6 +9,6 @@ class GetGitHubReposByUser(
     private val repository: GitHubRepoRepository
 ) {
 
-    suspend operator fun invoke(name: String): Either<DomainError, List<GitHubRepo>> =
-        repository.getGitHubReposByUser(name)
+    suspend operator fun invoke(name: String, forceRefresh: Boolean = false): Either<DomainError, List<GitHubRepo>> =
+        repository.getGitHubReposByUser(name, forceRefresh)
 }

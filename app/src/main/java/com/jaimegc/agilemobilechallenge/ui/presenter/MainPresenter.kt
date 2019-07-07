@@ -23,9 +23,9 @@ class MainPresenter(
         cancel()
     }
 
-    fun getGitHubReposByUser(name: String) = launch {
+    fun getGitHubReposByUser(name: String, forceRefresh: Boolean = false) = launch {
         view?.showLoading()
-        val result = getGitHubReposByUser.invoke(name)
+        val result = getGitHubReposByUser.invoke(name, forceRefresh)
         view?.hideLoading()
 
         result.fold({ handleError(it) }, { if (it.isNotEmpty()) view?.goDetail(it) else view?.showReposNotFound() })

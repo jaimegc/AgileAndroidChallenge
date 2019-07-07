@@ -39,7 +39,7 @@ class GitHubRepoRepositoryTest {
     }
 
     @Test
-    fun `should return get all data from the first datasource if info is updated and contains the key`() = runBlockingTest {
+    fun `should return get all data from the local datasource if info is updated and contains the key`() = runBlockingTest {
         givenDataSourceLocalWithData(dataSourceLocal)
 
         gitHubRepoRepository.getGitHubReposByUser(USERNAME)
@@ -49,7 +49,7 @@ class GitHubRepoRepositoryTest {
     }
 
     @Test
-    fun `should return get all data from the second datasource if info is not updated`() = runBlockingTest {
+    fun `should return get all data from the remote datasource if info is not updated`() = runBlockingTest {
         givenDataSourceLocalWithOldData(dataSourceLocal)
         givenDataSourceRemoteWithData(dataSourceRemote)
 

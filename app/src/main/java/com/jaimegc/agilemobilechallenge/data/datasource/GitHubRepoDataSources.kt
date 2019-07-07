@@ -43,9 +43,9 @@ class LocalGitHubRepoDataSource(
         cache[name] = repos
     }
 
-    fun isValid(name: String): Boolean =
-        if (isUpdated() && contains(name)) {
-            true
+    fun isValid(name: String, forceRefresh: Boolean = false): Boolean =
+        if (!forceRefresh) {
+            isUpdated() && contains(name)
         } else {
             invalidateCache()
             false
