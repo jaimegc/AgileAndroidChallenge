@@ -54,15 +54,22 @@ dependencies {
     implementation libs.retrofit_coroutines_adapter
     implementation libs.retrofit_gson
     implementation libs.recyclerview
-    implementation libs.room
     implementation libs.room_ktx
+    implementation libs.room_runtime
 
-    kapt "androidx.room:room-compiler:2.1.0"
-    implementation "androidx.room:room-runtime:2.1.0"
+    kapt libs.room_compiler
 
     testImplementation libs.coroutines_test
     testImplementation libs.junit
     testImplementation libs.mockito_core
     testImplementation libs.mockito_inline
     testImplementation libs.mockito_kotlin
+    testImplementation libs.room_testing
+
+    androidTestImplementation libs.junit
+    androidTestImplementation libs.junit_ktx
+    androidTestImplementation libs.mockito_kotlin
+    androidTestImplementation libs.room_testing
+    androidTestImplementation libs.test_core
+    androidTestImplementation libs.test_running
 }

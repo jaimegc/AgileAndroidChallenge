@@ -13,7 +13,7 @@ ext {
             circle_imageview             : '3.0.0',
             constraint                   : '2.0.0-alpha5',
             coroutines                   : '1.2.1',
-            junit                        : '4.12',
+            junit                        : '1.1.1',
             kodein                       : '6.1.0',
             kotlin                       : '1.3.21',
             mockito                      : '2.27.0',
@@ -24,6 +24,7 @@ ext {
             retrofit_coroutines_adapter  : '0.9.2',
             room                         : '2.1.0',
             support                      : '1.0.0',
+            test                         : '1.1.1',
     ]
 
     build_plugins = [
@@ -39,7 +40,8 @@ ext {
             coroutines                    : [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-android', version: versions.coroutines],
             coroutines_test               : [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-test', version: versions.coroutines],
             design                        : [group: 'com.android.support', name: 'design', version: versions.support],
-            junit                         : [group: 'junit', name: 'junit', version: versions.junit],
+            junit                         : [group: 'androidx.test.ext', name: 'junit', version: versions.junit],
+            junit_ktx                     : [group: 'androidx.test.ext', name: 'junit-ktx', version: versions.junit],
             kodein_generic                : [group: 'org.kodein.di', name: 'kodein-di-generic-jvm', version: versions.kodein],
             kodein_framework_core         : [group: 'org.kodein.di', name: 'kodein-di-framework-android-core', version: versions.kodein],
             kodein_framework_x            : [group: 'org.kodein.di', name: 'kodein-di-framework-android-x', version: versions.kodein],
@@ -53,8 +55,12 @@ ext {
             recyclerview                  : [group: 'androidx.recyclerview', name: 'recyclerview', version: versions.support],
             retrofit_coroutines_adapter   : [group: 'com.jakewharton.retrofit', name: 'retrofit2-kotlin-coroutines-adapter', version: versions.retrofit_coroutines_adapter],
             retrofit_gson                 : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versions.retrofit],
-            room                          : [group: 'androidx.room', name: 'room-runtime', version: versions.room],
+            room_compiler                 : [group: 'androidx.room', name: 'room-compiler', version: versions.room],
             room_ktx                      : [group: 'androidx.room', name: 'room-ktx', version: versions.room],
+            room_runtime                  : [group: 'androidx.room', name: 'room-runtime', version: versions.room],
+            room_testing                  : [group: 'androidx.room', name: 'room-testing', version: versions.room],
+            test_core                     : [group: 'androidx.test', name: 'core', version: versions.test],
+            test_running                  : [group: 'androidx.test', name: 'runner', version: versions.test],
     ]
 
 }
