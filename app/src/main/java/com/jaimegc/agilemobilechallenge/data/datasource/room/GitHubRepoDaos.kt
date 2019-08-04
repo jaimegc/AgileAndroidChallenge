@@ -6,9 +6,6 @@ import androidx.room.*
 @Dao
 interface GitHubRepositoryDao {
 
-    @Query("SELECT * FROM github_repository")
-    suspend fun getAllRepos(): List<GitHubRepositoryEntity>
-
     @Query("SELECT * FROM github_repository WHERE username_id=:username")
     suspend fun getRepositoriesByUser(username: String): List<GitHubRepositoryEntity>
 

@@ -12,16 +12,15 @@ open class ServerApiClient(private val serverApiConfig: ServerApiConfig) {
         const val RESPONSE_ERROR_403: Int = 403
     }
 
-    fun <T> getApi(apiRest: Class<T>): T {
-        return serverApiConfig.retrofit.create(apiRest)
-    }
+    fun <T> getApi(apiRest: Class<T>): T =
+        serverApiConfig.retrofit.create(apiRest)
 
     suspend fun <T : Any> suspendApiCall(call: suspend () -> Response<T>?): Response<T>? =
-            try {
-                call.invoke()
-            } catch (e: Exception) {
-                null
-            }
+        try {
+            call.invoke()
+        } catch (e: Exception) {
+            null
+        }
 
     fun <T> execute(call: Call<T>): T? {
         var response: Response<T>
@@ -50,7 +49,7 @@ open class ServerApiClient(private val serverApiConfig: ServerApiConfig) {
                 if (it.body() != null) {
                     it.body()
                 } else {
-                    null
+                    throw ServerConnectionApiException
                 }
             } else {
                 response.parseErrorCode()
@@ -60,7 +59,6 @@ open class ServerApiClient(private val serverApiConfig: ServerApiConfig) {
     }
 
     fun <T> Response<T>.parseErrorCode() {
-
         when (this.code()) {
             RESPONSE_ERROR_500 -> throw Server500ApiException
             RESPONSE_ERROR_404 -> throw Server404ApiException

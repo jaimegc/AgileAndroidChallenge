@@ -1,5 +1,6 @@
 package com.jaimegc.agilemobilechallenge
 
+import androidx.lifecycle.MutableLiveData
 import arrow.core.Either
 import com.jaimegc.agilemobilechallenge.domain.model.DomainError
 import com.jaimegc.agilemobilechallenge.domain.model.GitHubRepo
@@ -102,18 +103,22 @@ class MainPresenterTest {
     }
 
     private fun givenUseCaseWithData() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.right(LIST_REPOS))
+        whenever(getGitHubReposByUser.invoke(USERNAME))
+            .thenReturn(MutableLiveData<Either<DomainError, List<GitHubRepo>>>(Either.right(LIST_REPOS)))
     }
 
     private fun givenUseCaseWithEmptyData() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.right(emptyList()))
+        whenever(getGitHubReposByUser.invoke(USERNAME))
+            .thenReturn(MutableLiveData<Either<DomainError, List<GitHubRepo>>>(Either.right(emptyList())))
     }
 
     private fun givenUseCaseWithUserNotFoundError() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.left(DomainError.UserNotFoundDomainError))
+        whenever(getGitHubReposByUser.invoke(USERNAME))
+            .thenReturn(MutableLiveData<Either<DomainError, List<GitHubRepo>>>(Either.left(DomainError.UserNotFoundDomainError)))
     }
 
     private fun givenUseCaseWithUserUnknownError() = runBlockingTest {
-        whenever(getGitHubReposByUser.invoke(USERNAME)).thenReturn(Either.left(DomainError.UserUnknownDomainError))
+        whenever(getGitHubReposByUser.invoke(USERNAME))
+            .thenReturn(MutableLiveData<Either<DomainError, List<GitHubRepo>>>(Either.left(DomainError.UserUnknownDomainError)))
     }
 }

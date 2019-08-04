@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.jaimegc.agilemobilechallenge"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -43,20 +43,23 @@ dependencies {
     implementation libs.circle_imageview
     implementation libs.constraint
     implementation libs.coroutines
-    implementation libs.design
+    implementation libs.design_material
     implementation libs.kodein_generic
     implementation libs.kodein_framework_core
     implementation libs.kodein_framework_x
+    implementation libs.lifecycle_extensions
+    implementation libs.lifecycle_livedata
+    implementation libs.lifecycle_runtime
     implementation libs.okhttp
     implementation libs.okhttp_logging
     implementation libs.picasso
     implementation libs.retrofit
-    implementation libs.retrofit_coroutines_adapter
     implementation libs.retrofit_gson
     implementation libs.recyclerview
     implementation libs.room_ktx
     implementation libs.room_runtime
 
+    annotationProcessor libs.lifecycle_compiler
     kapt libs.room_compiler
 
     testImplementation libs.coroutines_test

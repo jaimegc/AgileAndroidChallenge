@@ -1,9 +1,11 @@
 package com.jaimegc.agilemobilechallenge
 
+import androidx.lifecycle.MutableLiveData
 import arrow.core.Either
 import com.jaimegc.agilemobilechallenge.data.datasource.LocalGitHubRepoDataSource
 import com.jaimegc.agilemobilechallenge.data.datasource.RemoteGitHubRepoDataSource
 import com.jaimegc.agilemobilechallenge.data.repository.GitHubRepoRepository
+import com.jaimegc.agilemobilechallenge.domain.model.DomainError
 import com.jaimegc.agilemobilechallenge.domain.model.GitHubRepo
 import com.jaimegc.agilemobilechallenge.domain.model.OwnerRepo
 import com.nhaarman.mockitokotlin2.*
@@ -71,11 +73,13 @@ class GitHubRepoRepositoryTest {
 
     private fun givenDataSourceLocalWithData(dataSourceLocal: LocalGitHubRepoDataSource) = runBlockingTest {
         whenever(dataSourceLocal.isValid(USERNAME)).thenReturn(true)
-        whenever(dataSourceLocal.getGitHubReposByUser(USERNAME)).thenReturn(Either.right(LIST_REPOS))
+        whenever(dataSourceLocal.getGitHubReposByUser(USERNAME))
+            .thenReturn(MutableLiveData<Either<DomainError, List<GitHubRepo>>>(Either.right(LIST_REPOS)))
     }
 
     private fun givenDataSourceRemoteWithData(dataSourceRemote: RemoteGitHubRepoDataSource) = runBlockingTest {
-        whenever(dataSourceRemote.getGitHubReposByUser(USERNAME)).thenReturn(Either.right(LIST_REPOS))
+        whenever(dataSourceRemote.getGitHubReposByUser(USERNAME))
+            .thenReturn(MutableLiveData<Either<DomainError, List<GitHubRepo>>>(Either.right(LIST_REPOS)))
     }
 
     private fun givenDataSourceLocalWithOldData(dataSourceLocal: LocalGitHubRepoDataSource) = runBlockingTest {

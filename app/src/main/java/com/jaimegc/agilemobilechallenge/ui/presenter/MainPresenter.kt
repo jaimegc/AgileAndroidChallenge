@@ -2,6 +2,7 @@ package com.jaimegc.agilemobilechallenge.ui.presenter
 
 import androidx.lifecycle.Lifecycle.Event.*
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import com.jaimegc.agilemobilechallenge.common.extensions.weak
 import com.jaimegc.agilemobilechallenge.domain.model.DomainError
@@ -18,6 +19,8 @@ class MainPresenter(
 
     private val view: View? by weak(view)
 
+    private lateinit var values: MutableLiveData<List<GitHubRepo>>
+
     @OnLifecycleEvent(ON_DESTROY)
     fun destroy() {
         cancel()
@@ -28,7 +31,7 @@ class MainPresenter(
         val result = getGitHubReposByUser.invoke(name, forceRefresh)
         view?.hideLoading()
 
-        result.fold({ handleError(it) }, { if (it.isNotEmpty()) view?.goDetail(it) else view?.showReposNotFound() })
+        result.value?.fold({ handleError(it) }, { if (it.isNotEmpty()) view?.goDetail(it) else view?.showReposNotFound() })
     }
 
     private fun handleError(error: DomainError) {
