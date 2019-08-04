@@ -19,8 +19,6 @@ class MainPresenter(
 
     private val view: View? by weak(view)
 
-    private lateinit var values: MutableLiveData<List<GitHubRepo>>
-
     @OnLifecycleEvent(ON_DESTROY)
     fun destroy() {
         cancel()
