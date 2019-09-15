@@ -55,7 +55,7 @@ New branches:
 
 <b>mvp-room-database</b> uses Room database to implement the local datasource. Also, I use LiveData with Either.
 
-<b>master-new-list-adapter</b> refactor RecyclerView.Adapter to use ListAdapter with AsyncListDiffer
+<b>master-new-list-adapter</b> refactor RecyclerView.Adapter to use ListAdapter with AsyncListDiffer.
 
 ## Screens
 
