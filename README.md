@@ -49,11 +49,13 @@ The idea is complete this challenge on a couple of afternoons more or less. In t
     BetterAdapter to draw list items
     Unit testing for presenter and repository
        
-New branches (follow in order):
+New branches:
 
 <b>mvp-new-way</b> uses another way to implement the repository and datasources. Also, the new retrofit version 2.6.0 is used to add <i>suspend</i> functions and remove <i>Deferred</i> calls.
 
 <b>mvp-room-database</b> uses Room database to implement the local datasource. Also, I use LiveData with Either.
+
+<b>master-new-list-adapter</b> refactor RecyclerView.Adapter to use ListAdapter with AsyncListDiffer.
 
 ## Screens
 
