@@ -58,6 +58,14 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="RepositoryOtherText">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="LanguageText">
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/disabled</item>

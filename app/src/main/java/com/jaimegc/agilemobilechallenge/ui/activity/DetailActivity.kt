@@ -86,7 +86,7 @@ class DetailActivity : BaseActivity(), DetailPresenter.View {
     }
 
     override fun showItems(items: List<ItemViewModel>) {
-        adapter.addAll(items)
+        adapter.submitList(items)
     }
 
     override fun showLoading() {
